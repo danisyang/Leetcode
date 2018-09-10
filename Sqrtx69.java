@@ -73,3 +73,24 @@ class Solution{
     }
 }
 //牛顿法：有空看一下牛顿法 是什么意思
+
+//新改的 0904日新改的答案 有一个坑就是溢出 所以不能用mid*mid>x 而应该用 mid > x/mid
+//击败了88.41%
+class Solution {
+    public int sqrt(int x) {
+        if (x == 0)
+            return 0;
+        int left = 1, right = x;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (mid > x/mid) {
+                right = mid - 1;
+            } else {
+                if ((mid + 1) > x/(mid+1))
+                    return mid;
+                left = mid + 1;
+            }
+        }
+        return left;
+    }
+}
